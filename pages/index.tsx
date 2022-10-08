@@ -1,10 +1,14 @@
 import NavBar from 'components/nav'
-import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useSession } from "next-auth/react";
 
 
 
-const Home: NextPage = () => {
+export default () => {
+  const { data: session, status } = useSession();
+  if (status === "loading")
+    return <p>Loading...</p>;
+  
   return (
     <>
       <Head>
@@ -19,5 +23,3 @@ const Home: NextPage = () => {
       <NavBar elements={["home", "about"]} />
     </>)
 }
-
-export default Home;
